@@ -1,2 +1,29 @@
-versoin: "1"
+version: "1"
+
+services:
+  application:
+    image: springboot-img
+    networks:
+      - sb-ms-network
+    ports:
+      - 8080:8080 
+    depends_on:
+      - sqldb
+    volumes:
+      - /data/springbot-app
+
+
+  sqldb:
+    image: mysql:5.7
+    networks:
+        - sb-ms-network
+    environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=sbms   
+    volumes:
+        - data/sql       
+networks: 
+  sb-ms-network:   
+
+
   
